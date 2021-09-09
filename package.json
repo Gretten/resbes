@@ -2,6 +2,7 @@
   "name": "sevser",
   "version": "0.1.0",
   "private": true,
+  "type:": "module",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
@@ -17,6 +18,7 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "babel-plugin-inline-json-import": "^0.3.2",
     "vue-template-compiler": "^2.6.11"
   }
 }

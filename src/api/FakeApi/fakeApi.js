@@ -1,5 +1,11 @@
+// import json from './fakeData.json';
+
 const fakePromiseCallback = (resolve, reject) => {
-    
+    return false;
 }
 
-export const fakeApiList = () => new Promise(fakePromiseCallback)
+const fakeApiList = () => new Promise(fakePromiseCallback)
+
+console.log(json)
+
+export default fakeApiList;
