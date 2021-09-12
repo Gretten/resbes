@@ -16,8 +16,5 @@
         components: {
             Header,
         },
-        created: function() {
-            this.$store.dispatch('fetchListData');
-        }
     }
 </script>

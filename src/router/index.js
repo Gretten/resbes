@@ -1,35 +1,50 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '../store/index.js'
+import routeProtector from './router.config'
+import { paths, names } from './router.constants'
 
 Vue.use(VueRouter)
 
-const isAuth = store.getters.isUserAuth;
+const { 
+  MAIN, 
+  LOGIN, 
+  PROFILE, 
+  REGISTER, 
+  LIST 
+} = paths;
+
+const {
+  REGISTER_PAGE,
+  LOGIN_PAGE,
+  LIST_PAGE,
+  MAIN_PAGE,
+  PROFILE_PAGE,
+} = names;
 
 const routes = [
   {
-    path: '/',
-    name: 'MainPage',
+    path: MAIN,
+    name: MAIN_PAGE,
     component: () => import('@/views/MainPage/MainPage.vue')
   },
   {
-    path: '/login',
-    name: 'LoginPage',
+    path: LOGIN,
+    name: LOGIN_PAGE,
     component: () => import('@/views/LoginPage/LoginPage.vue')
   },
   {
-    path: '/profile',
-    name: 'ProfilePage',
+    path: PROFILE,
+    name: PROFILE_PAGE,
     component: () => import('@/views/ProfilePage/ProfilePage.vue')
   },
   {
-    path: '/register',
-    name: 'RegisterPage',
+    path: REGISTER,
+    name: REGISTER_PAGE,
     component: () => import('@/views/RegisterPage/RegisterPage.vue')
   },
   {
-    path: '/list',
-    name: 'ListPage',
+    path: LIST,
+    name: LIST_PAGE,
     component: () => import('@/views/ListPage/ListPage.vue')
   }
 ]
@@ -37,20 +52,8 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   routes,
-
 })
 
-router.beforeEach(
-    (to, from, next) => {
-        if((to.name === 'ListPage' || to.name === 'ProfilePage') && !isAuth ) {
-            console.log('hello')
-            next('/')
-        } else if(to.name === 'LoginPage' && isAuth) {
-            next('/profile')
-        } else {
-            next()
-        }
-    }
-)
+router.beforeEach(routeProtector)
 
 export default router

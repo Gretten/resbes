@@ -9,10 +9,12 @@ const store = new Vuex.Store({
   state: {
     isAuth: false,
     listData: [],
+    username: '',
   },
   getters: {
     isUserAuth: state => state.isAuth,
     getListData: state => state.listData,
+    getUsername: state => state.username,
   },
   mutations: {
     setListData(state, payload) {
@@ -20,6 +22,9 @@ const store = new Vuex.Store({
     },
     setAuth(state) {
       state.isAuth = true;
+    },
+    setUsername(state, payload) {
+      state.username = payload;
     },
     clearAuth(state) {
       state.isAuth = false;
