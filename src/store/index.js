@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import adapter from '../api/Server/FakeDataAdapter/fakeDataAdapter'
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -9,12 +11,8 @@ const store = new Vuex.Store({
     listData: [],
   },
   getters: {
-    isUserAuth: state => {
-      return state.isAuth;
-    },
-    getListData: state => {
-      return state.listData;
-    }
+    isUserAuth: state => state.isAuth,
+    getListData: state => state.listData,
   },
   mutations: {
     setListData(state, payload) {
@@ -28,8 +26,13 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    async fetchListData({commit}, payload) {
-      commit('setListData', payload)
+    async fetchListData({commit}) {
+      try {
+        const data = await adapter.getObjects();
+        commit('setListData', data)
+      } catch(e) {
+        console.log(e)
+      }
     }
   },
 })
