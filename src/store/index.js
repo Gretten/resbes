@@ -3,13 +3,35 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
+    isAuth: false,
+    listData: [],
+  },
+  getters: {
+    isUserAuth: state => {
+      return state.isAuth;
+    },
+    getListData: state => {
+      return state.listData;
+    }
   },
   mutations: {
+    setListData(state, payload) {
+      state.listData = payload;
+    },
+    setAuth(state) {
+      state.isAuth = true;
+    },
+    clearAuth(state) {
+      state.isAuth = false;
+    }
   },
   actions: {
+    async fetchListData({commit}, payload) {
+      commit('setListData', payload)
+    }
   },
-  modules: {
-  }
 })
+
+export default store;

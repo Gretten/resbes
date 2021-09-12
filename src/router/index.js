@@ -1,27 +1,56 @@
-// import Vue from 'vue'
-// import VueRouter from 'vue-router'
-// // import Home from '../views/Home.vue'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import store from '../store/index.js'
 
-// Vue.use(VueRouter)
+Vue.use(VueRouter)
 
-// const routes = [
-//   {
-//     path: '/',
-//     name: 'Home',
-//     component: Home
-//   },
-//   {
-//     path: '/about',
-//     name: 'About',
-//     // route level code-splitting
-//     // this generates a separate chunk (about.[hash].js) for this route
-//     // which is lazy-loaded when the route is visited.
-//     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-//   }
-// ]
+const isAuth = store.getters.isUserAuth;
 
-// const router = new VueRouter({
-//   routes
-// })
+const routes = [
+  {
+    path: '/',
+    name: 'MainPage',
+    component: () => import('@/views/MainPage/MainPage.vue')
+  },
+  {
+    path: '/login',
+    name: 'LoginPage',
+    component: () => import('@/views/LoginPage/LoginPage.vue')
+  },
+  {
+    path: '/profile',
+    name: 'ProfilePage',
+    component: () => import('@/views/ProfilePage/ProfilePage.vue')
+  },
+  {
+    path: '/register',
+    name: 'RegisterPage',
+    component: () => import('@/views/RegisterPage/RegisterPage.vue')
+  },
+  {
+    path: '/list',
+    name: 'ListPage',
+    component: () => import('@/views/ListPage/ListPage.vue')
+  }
+]
 
-// export default router
+const router = new VueRouter({
+  mode: 'history',
+  routes,
+
+})
+
+router.beforeEach(
+    (to, from, next) => {
+        if((to.name === 'ListPage' || to.name === 'ProfilePage') && !isAuth ) {
+            console.log('hello')
+            next('/')
+        } else if(to.name === 'LoginPage' && isAuth) {
+            next('/profile')
+        } else {
+            next()
+        }
+    }
+)
+
+export default router
