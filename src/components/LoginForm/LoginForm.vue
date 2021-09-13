@@ -21,6 +21,7 @@
       <b-form-group id="input-group-2" label="Пароль:" label-for="input-2">
         <b-form-input
           id="input-2"
+          type="password"
           v-model="form.password"
           placeholder="Введите пароль"
           :state="passValidation"
@@ -32,9 +33,6 @@
       </b-form-group>
       <b-button type="submit" variant="primary" class="mt-2" >Подтвердить</b-button>
     </b-form>
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
   </div>
 </template>
 
