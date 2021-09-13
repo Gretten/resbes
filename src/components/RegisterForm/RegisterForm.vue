@@ -3,13 +3,13 @@
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group
         id="input-group-1"
-        label="Логин:"
+        label="Придумайте логин:"
         label-for="input-1"
       >
         <b-form-input
           id="input-1"
           v-model="form.login" 
-          placeholder="Введите логин"
+          placeholder="логин"
           required
           :state="loginValidation"
         ></b-form-input>
@@ -18,11 +18,11 @@
       </b-form-invalid-feedback>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Пароль:" label-for="input-2">
+      <b-form-group id="input-group-2" label="Придумайте пароль:" label-for="input-2">
         <b-form-input
           id="input-2"
           v-model="form.password"
-          placeholder="Введите пароль"
+          placeholder="пароль"
           :state="passValidation"
           required
         ></b-form-input>
@@ -35,6 +35,8 @@
     <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
     </b-card>
+          <b-button @click="getUser" type="submit" variant="primary" class="mt-2" >Тест</b-button>
+
   </div>
 </template>
 
@@ -51,29 +53,26 @@
       }
     },
     methods: {
-      onSubmit(event) {
-        event.preventDefault()
-        const isLoggedIn = authAdapter.checkLoginAndPass({
-            login: this.form.login,
-            password: this.form.password,
-        })
-        if(!isLoggedIn) {
-          alert('Попробуйте еще раз!')
-        } else {
-          this.$store.commit('setUsername', this.form.login)
-          this.$store.commit('setAuth')
-          this.$router.push('/profile')  
-        }
-      },
       onReset(event) {
         event.preventDefault()
-        this.form.email = ''
         this.form.name = ''
+        this.form.password = ''
         this.show = false
         this.$nextTick(() => {
           this.show = true
         })
       },
+      onSubmit(event) {
+        event.preventDefault()
+        authAdapter.setRegistration({
+            login: this.form.login,
+            password: this.form.password,
+        })
+        alert('registred successfully!')
+        },
+      getUser() {
+          console.log(authAdapter.getUserData('adminnnnn'))
+      }
     },
     computed: {
       passValidation() {

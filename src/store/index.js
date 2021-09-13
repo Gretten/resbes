@@ -26,6 +26,9 @@ const store = new Vuex.Store({
     setUsername(state, payload) {
       state.username = payload;
     },
+    clearUsername(state) {
+      state.username = ''
+    },
     clearAuth(state) {
       state.isAuth = false;
     }

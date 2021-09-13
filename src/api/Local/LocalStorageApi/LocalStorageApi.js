@@ -1,9 +1,11 @@
 class LocalStorageApi {
   
     storage = localStorage;
+
+    users = [];
   
-    setLocalStorageItem(item) {
-        this.storage.setItem(item.key, item.value);
+    setLocalStorageItem(key, value) {
+        this.storage.setItem(key, value);
     }
 
     getLocalStorageItem(key) {
