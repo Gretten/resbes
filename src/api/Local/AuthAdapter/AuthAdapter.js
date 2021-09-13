@@ -2,10 +2,10 @@ import LocalStorageApi from "../LocalStorageApi/LocalStorageApi";
 
 class AuthAdapter {
     localStorageApi = new LocalStorageApi();
-    usersAlias = 'users'
+    #usersAlias = 'users'
 
     setRegistration(data) {
-        const allUsers = JSON.parse(this.localStorageApi.getLocalStorageItem(this.usersAlias)) || [];
+        const allUsers = JSON.parse(this.localStorageApi.getLocalStorageItem(this.#usersAlias)) || [];
         const newUser = {
             user: data.login, 
             data: {
@@ -14,13 +14,13 @@ class AuthAdapter {
             }
         }
         this.localStorageApi.setLocalStorageItem(
-            this.usersAlias,
+            this.#usersAlias,
             JSON.stringify([newUser, ...allUsers])
         )
     }
 
     getUserData(login) {
-        const allUsers = JSON.parse(this.localStorageApi.getLocalStorageItem(this.usersAlias)) || [];
+        const allUsers = JSON.parse(this.localStorageApi.getLocalStorageItem(this.#usersAlias)) || [];
         const userData = allUsers.find(user => {
             return user.user === login && user.data
         })

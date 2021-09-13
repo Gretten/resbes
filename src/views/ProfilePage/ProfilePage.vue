@@ -10,12 +10,10 @@
 </template>
 
 <script>
-import authAdapter from '@/api/Local/AuthAdapter/AuthAdapter'
 export default {
     name: 'ProfilePage',
     methods: {
         logout: function() {
-            authAdapter.removeLogin();
             this.$store.commit('clearUsername');
             this.$store.commit('clearAuth');
             this.$router.push('/')
