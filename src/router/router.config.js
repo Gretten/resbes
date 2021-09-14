@@ -1,15 +1,17 @@
 import store from '../store/index.js'
-
+import { paths, names } from './router.constants'
+const { LOGIN_PAGE, PROFILE_PAGE, LIST_PAGE } = names;
+const { LOGIN, PROFILE } = paths;
 const routeProtector = (to, from, next) => {
     const isAuth = store.getters.isUserAuth;
 
     if((
     // to.name === 'ListPage' 
     // || 
-    to.name === 'ProfilePage') && !isAuth ) {
-        next('/login')
-    } else if(to.name === 'LoginPage' && isAuth) {
-        next('/profile')
+    to.name === PROFILE_PAGE) && !isAuth ) {
+        next(LOGIN)
+    } else if(to.name === LOGIN_PAGE && isAuth) {
+        next(PROFILE)
     } else {
         next()
     }
