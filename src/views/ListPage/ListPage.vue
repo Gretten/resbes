@@ -10,7 +10,17 @@
             id='listTable'
             :items="getListData"
             :fields="fields"
+            :per-page="perPage"
+            :current-page="currentPage"
         ></b-table>
+
+        <b-pagination
+            v-model="currentPage"
+            :totalRows="rows"
+            :perPage="perPage"
+            ariaControls="listTable"
+        ></b-pagination>
+
     </div>
 
     
@@ -36,6 +46,8 @@ export default {
                 { key: 'Salary', sortable: true },
                 { key: 'Currency', sortable: true }
                 ],
+            perPage: 10,
+            currentPage: 1,
         }
     },
     computed: {
