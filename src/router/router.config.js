@@ -5,12 +5,9 @@ const { LOGIN, PROFILE } = paths;
 const routeProtector = (to, from, next) => {
     const isAuth = store.getters.isUserAuth;
 
-    if((
-    // to.name === 'ListPage' 
-    // || 
-    to.name === PROFILE_PAGE) && !isAuth ) {
+    if((to.name === LIST_PAGE || to.name === PROFILE_PAGE) && !isAuth ) {
         next(LOGIN)
-    } else if(to.name === LOGIN_PAGE && isAuth) {
+    } else if((to.name === LOGIN_PAGE) && isAuth) {
         next(PROFILE)
     } else {
         next()
