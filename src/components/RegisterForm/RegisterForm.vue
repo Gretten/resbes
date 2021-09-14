@@ -12,7 +12,6 @@
           placeholder="логин"
           required
           :state="loginValidation"
-          type="password"
         ></b-form-input>
         <b-form-invalid-feedback :state="loginValidation">
         От 6 до 13 символов
@@ -25,6 +24,7 @@
           v-model="form.password"
           placeholder="пароль"
           :state="passValidation"
+          type="password"
           required
         ></b-form-input>
         <b-form-invalid-feedback :state="passValidation">
