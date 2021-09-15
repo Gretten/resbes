@@ -1,4 +1,4 @@
-import authAdapter from '../api/Server/FakeDataAdapter/fakeDataAdapter'
+import mockDataAdapter from '../api/Server/MockDataAdapter/mockDataAdapter'
 
 export const listDataModule = {
     state: () => ({
@@ -15,7 +15,7 @@ export const listDataModule = {
     actions: {
         async fetchListData({commit}) {
           try {
-            const data = await authAdapter.getObjects();
+            const data = await mockDataAdapter.getObjects();
             commit('setListData', data)
           } catch(e) {
             console.log(e)

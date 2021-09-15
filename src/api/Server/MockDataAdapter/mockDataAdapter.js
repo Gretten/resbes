@@ -1,6 +1,6 @@
-import fakeApiList from '../FakeApi/fakeApi'
+import mockApiList from '../MockApi/mockApi'
 
-class FakeDataAdapter {
+class MockDataAdapter {
 
     constructor(errMsg, api) {
         this.errMsg = errMsg;
@@ -21,9 +21,9 @@ class FakeDataAdapter {
     }
 }
 
-const fakeDataAdapter = new FakeDataAdapter(
+const mockDataAdapter = new MockDataAdapter(
     'Нет объектов для отображения',
-    fakeApiList
+    mockApiList
 );
 
-export default fakeDataAdapter;
+export default mockDataAdapter;
