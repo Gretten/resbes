@@ -33,6 +33,7 @@
             :filter="filter"
             :filter-included-fields="filterOn"
             @filtered="onFiltered"
+            :filter-function="customFilter"
         ></b-table>
 
         <b-pagination
@@ -87,6 +88,11 @@ export default {
             this.maxRows = filteredItems.length;
             this.currentPage = 1;
       },
+      customFilter(rowContent, search) {
+          const name = rowContent.Name.toLowerCase();
+          const searchStr = search.toLowerCase();
+          return name.startsWith(searchStr);
+      }
     },
     watch: {
         objects: function (val) {
