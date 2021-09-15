@@ -2,13 +2,28 @@ import fakeApiList from '../FakeApi/fakeApi'
 
 class FakeDataAdapter {
 
-    api = fakeApiList;
+    constructor(errMsg, api) {
+        this.errMsg = errMsg;
+        this.api = api;
+    }
 
-    getObjects() {
-        return this.api()
+    async getObjects() {
+        try {
+            const result = await this.api()
+            if(result[0].Name) {
+                return result
+            } else {
+                return [{Name: this.errMsg}]
+            }
+        } catch(e) {
+            throw new Error(e)
+        }
     }
 }
 
-const fakeDataAdapter = new FakeDataAdapter();
+const fakeDataAdapter = new FakeDataAdapter(
+    'Нет объектов для отображения',
+    fakeApiList
+);
 
 export default fakeDataAdapter;
