@@ -11,11 +11,7 @@
           v-model="form.login" 
           placeholder="Введите логин"
           required
-          :state="loginValidation"
         ></b-form-input>
-        <b-form-invalid-feedback :state="loginValidation">
-        От 6 до 13 символов
-      </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group id="input-group-2" label="Пароль:" label-for="input-2">
@@ -24,12 +20,8 @@
           type="password"
           v-model="form.password"
           placeholder="Введите пароль"
-          :state="passValidation"
           required
         ></b-form-input>
-        <b-form-invalid-feedback :state="passValidation">
-        От 6 символов
-      </b-form-invalid-feedback>
       </b-form-group>
       <b-button type="submit" variant="primary" class="mt-2" >Подтвердить</b-button>
     </b-form>
