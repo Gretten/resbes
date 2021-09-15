@@ -1,4 +1,4 @@
-import adapter from '../api/Server/FakeDataAdapter/fakeDataAdapter'
+import authAdapter from '../api/Server/FakeDataAdapter/fakeDataAdapter'
 
 export const listDataModule = {
     state: () => ({
@@ -15,7 +15,7 @@ export const listDataModule = {
     actions: {
         async fetchListData({commit}) {
           try {
-            const data = await adapter.getObjects();
+            const data = await authAdapter.getObjects();
             commit('setListData', data)
           } catch(e) {
             console.log(e)
